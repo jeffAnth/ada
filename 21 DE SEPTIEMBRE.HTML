@@ -1,0 +1,522 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para mi cuysita Adamaris</title>
+  <style>
+    :root {
+      --pink-1: #f9dff5;
+      --pink-2: #f9b8d7;
+      --pink-3: #ff69b3;
+      --pink-4: #ff4f9f;
+      --rose: #ff7ca6;
+      --yellow-1: #fff2bf;
+      --yellow-2: #ffd75d;
+      --gold: #f9d57d;
+      --cream: #fffaf5;
+      --lavender: #f0deff;
+      --ink: #482a3d;
+      --muted: #5f4058;
+      --white: rgba(255,255,255,0.72);
+      --shadow: 0 30px 80px rgba(140, 80, 109, 0.22);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--ink);
+      background: #f8dff2;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .page {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background-image: url('hello-kitty-usagif-animation-20.gif');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      animation: bgShift 12s ease-in-out infinite alternate;
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.3), transparent 38%),
+        radial-gradient(circle at bottom right, rgba(255, 206, 230, 0.4), transparent 42%),
+        linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
+      pointer-events: none;
+    }
+
+    .page::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(245, 214, 239, 0.18));
+      pointer-events: none;
+    }
+
+    .side-gif {
+      position: absolute;
+      width: 22vw;
+      max-width: 240px;
+      height: 58vh;
+      top: 18%;
+      pointer-events: none;
+      opacity: 0.92;
+      filter: drop-shadow(0 16px 24px rgba(117,62,95,0.10));
+      animation: floatSide 5.6s ease-in-out infinite alternate;
+      z-index: 1;
+    }
+
+    .side-gif.left { left: 2%; }
+    .side-gif.right { right: 2%; animation-delay: 1.2s; }
+
+    .side-gif img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      animation: bobImage 4.8s ease-in-out infinite alternate;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      z-index: 20;
+      background: rgba(245, 214, 239, 0.3);
+      backdrop-filter: blur(4px);
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    .overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .intro-box {
+      position: relative;
+      width: min(560px, 88vw);
+      padding: 30px 22px 26px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.62), rgba(255,255,255,0.34));
+      border: 1px solid rgba(255,255,255,0.85);
+      box-shadow: 0 26px 70px rgba(151, 91, 121, 0.18), inset 0 1px 0 rgba(255,255,255,0.9);
+      text-align: center;
+      animation: pulseCard 2.2s ease-in-out infinite alternate;
+    }
+
+    .intro-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: #ff4b9d;
+      margin-bottom: 14px;
+    }
+
+    .intro-title {
+      margin: 0;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 900;
+      color: #552d46;
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+    }
+
+    .intro-sub {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .flower-ring {
+      position: relative;
+      width: 170px;
+      height: 170px;
+      margin: 14px auto 18px;
+      animation: spinFlower 8s linear infinite;
+    }
+
+    .flower-ring .center {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      width: 34px;
+      height: 34px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: #f8d85d;
+      border: 5px solid rgba(0,0,0,0.12);
+      box-shadow: 0 0 0 10px rgba(255,216,93,0.18);
+    }
+
+    .flower-ring .petal {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 36px;
+      height: 60px;
+      margin-left: -18px;
+      margin-top: -30px;
+      transform-origin: center 70%;
+      border-radius: 60% 60% 75% 75%;
+      border: 4px solid rgba(0,0,0,0.12);
+      box-shadow: inset 0 0 0 4px rgba(255,255,255,0.10);
+    }
+
+    .flower-ring .petal:nth-child(1) { background: #ff4d73; transform: rotate(0deg) translateY(-58px); }
+    .flower-ring .petal:nth-child(2) { background: #ffb74f; transform: rotate(45deg) translateY(-58px); }
+    .flower-ring .petal:nth-child(3) { background: #ffd55a; transform: rotate(90deg) translateY(-58px); }
+    .flower-ring .petal:nth-child(4) { background: #ff8ab1; transform: rotate(135deg) translateY(-58px); }
+    .flower-ring .petal:nth-child(5) { background: #ff4d73; transform: rotate(180deg) translateY(-58px); }
+    .flower-ring .petal:nth-child(6) { background: #ffb74f; transform: rotate(225deg) translateY(-58px); }
+    .flower-ring .petal:nth-child(7) { background: #ffd55a; transform: rotate(270deg) translateY(-58px); }
+    .flower-ring .petal:nth-child(8) { background: #ff8ab1; transform: rotate(315deg) translateY(-58px); }
+
+    .choice-row {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .choice-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .choice-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .choice-btn.yes {
+      background: linear-gradient(135deg, #ff69b3, #ff9b8f);
+      color: white;
+      box-shadow: 0 18px 28px rgba(255, 105, 179, 0.22);
+    }
+
+    .choice-btn.no {
+      background: rgba(255,255,255,0.75);
+      color: var(--ink);
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: 0 12px 20px rgba(90, 51, 77, 0.08);
+    }
+
+    .music-toggle {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 40;
+      border: 1px solid rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.62);
+      backdrop-filter: blur(6px);
+      color: var(--ink);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      font-size: 1.4rem;
+      cursor: pointer;
+      box-shadow: 0 18px 30px rgba(111, 57, 82, 0.14);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .music-toggle:hover {
+      transform: translateY(-1px) scale(1.03);
+    }
+
+    .no-phase {
+      display: none;
+      margin-top: 20px;
+      color: var(--ink);
+      font-size: 1.1rem;
+      font-weight: 800;
+      min-height: 30px;
+    }
+
+    .no-phase.show {
+      display: block;
+      animation: wiggle 0.5s ease-in-out 1;
+    }
+
+    .message-card {
+      position: relative;
+      z-index: 2;
+      width: min(780px, 90vw);
+      border-radius: 36px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.60), rgba(255,255,255,0.28));
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: 0 30px 90px rgba(142, 83, 114, 0.18), inset 0 1px 0 rgba(255,255,255,0.8);
+      padding: 36px 28px 30px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px) scale(0.96);
+      pointer-events: none;
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .message-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .message-card h2 {
+      margin: 0;
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      line-height: 1;
+      letter-spacing: 0.08em;
+      color: #4d2a40;
+      text-shadow: 0 4px 10px rgba(255, 255, 255, 0.45);
+    }
+
+    .message-card .small {
+      display: block;
+      font-size: 0.32em;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #ff5ca4;
+      margin-bottom: 12px;
+      font-weight: 900;
+    }
+
+    .message-card .text {
+      max-width: 640px;
+      margin: 24px auto 0;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: clamp(1.04rem, 2vw, 1.3rem);
+      text-wrap: pretty;
+    }
+
+    .message-card .text p {
+      margin: 0 0 15px;
+    }
+
+    .signature {
+      margin-top: 18px;
+      font-weight: 800;
+      color: #502c43;
+      letter-spacing: 0.04em;
+      text-shadow: 0 2px 8px rgba(255,255,255,0.4);
+    }
+
+    .emoji-dance {
+      position: absolute;
+      left: 50%;
+      top: 60%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .emoji-dance.show {
+      opacity: 1;
+      animation: laughDance 0.9s ease-in-out 2 alternate;
+    }
+
+    @keyframes bgShift {
+      0% { background-position: center; transform: scale(1.02); }
+      100% { background-position: center 12%; transform: scale(1.08); }
+    }
+
+    @keyframes floatSide {
+      0% { transform: translateY(0px) rotate(-2deg); }
+      100% { transform: translateY(-18px) rotate(2deg); }
+    }
+
+    @keyframes bobImage {
+      0% { transform: translateY(0px) scale(1); }
+      100% { transform: translateY(-12px) scale(1.04); }
+    }
+
+    @keyframes pulseCard {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.03); }
+    }
+
+    @keyframes spinFlower {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-8px) rotate(-2deg); }
+      40% { transform: translateX(8px) rotate(2deg); }
+      60% { transform: translateX(-6px) rotate(-1deg); }
+      80% { transform: translateX(6px) rotate(1deg); }
+    }
+
+    @keyframes laughDance {
+      0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+      50% { transform: translate(-50%, -55%) scale(1.18) rotate(10deg); }
+      100% { transform: translate(-50%, -50%) scale(1) rotate(-10deg); }
+    }
+
+    @media (max-width: 700px) {
+      .side-gif {
+        width: 28vw;
+        height: 42vh;
+      }
+      .message-card { padding: 30px 20px 22px; }
+    }
+  </style>
+</head>
+<body>
+  <button class="music-toggle" id="musicToggle" aria-label="Activar música">🔇</button>
+
+  <div class="page">
+    <div class="side-gif left"><img src="hello-kitty-usagif-animation-25.gif" alt="" /></div>
+    <div class="side-gif right"><img src="hello-kitty-usagif-animation-23.gif" alt="" /></div>
+
+    <div class="overlay" id="introOverlay">
+      <div class="intro-box">
+        <div class="intro-badge">Para ti</div>
+        <h1 class="intro-title">¿Me perdonas, cuysita?</h1>
+
+        <div class="flower-ring" aria-hidden="true">
+          <span class="petal"></span>
+          <span class="petal"></span>
+          <span class="petal"></span>
+          <span class="petal"></span>
+          <span class="petal"></span>
+          <span class="petal"></span>
+          <span class="petal"></span>
+          <span class="petal"></span>
+          <span class="center"></span>
+        </div>
+
+        <div class="intro-sub">Si dices que sí, te muestro algo muy bonito.</div>
+
+        <div class="choice-row">
+          <button class="choice-btn yes" id="yesBtn">Sí 💖</button>
+          <button class="choice-btn no" id="noBtn">No 🙈</button>
+        </div>
+
+        <div class="no-phase" id="noPhase">Noooooo, espera…</div>
+      </div>
+    </div>
+
+    <main class="message-card" id="messageCard">
+      <h2><span class="small">Para mi cuysita</span>Adamaris</h2>
+      <div class="text">
+        <p>Ada, la verdad me pareces una chica muy expresiva y creo que tienes una muy buena vibra. Tal vez sé que la situación por la distancia no me permita darte un presente, pero me caes piola y la verdad disfruto conversar contigo.</p>
+        <p>Me siento cómodo y eso es irremplazable, y aunque a veces no te entiendo y colapso jajaja, también me gusta mucho esa conexión que tenemos.</p>
+        <p>Espero seguir compartiendo más de esa energía que tienes.</p>
+      </div>
+      <div class="signature">Con cariño, alguien que disfruta muchísimo tu compañía 💛</div>
+      <div class="emoji-dance" id="emojiDance">😂</div>
+    </main>
+  </div>
+
+  <audio id="bgMusic" loop preload="auto">
+    <source src="favorito-camilo.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    const overlay = document.getElementById('introOverlay');
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const noPhase = document.getElementById('noPhase');
+    const messageCard = document.getElementById('messageCard');
+    const emojiDance = document.getElementById('emojiDance');
+    const music = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+
+    let noCount = 0;
+    const noMessages = [
+      'Noooooo, espera… todavía te veo muy especial 💕',
+      'Ay, mi cuysita me está haciendo sonreír 😄',
+      'Qué tierna eres, te sigo queriendo ver más 😜',
+      'Bueno… ya te lo digo igual, te quiero conocer más 💖'
+    ];
+
+    const startMusic = async () => {
+      if (!music) return;
+      music.volume = 0.35;
+      try {
+        await music.play();
+        if (musicToggle) {
+          musicToggle.textContent = '🔊';
+        }
+      } catch (error) {
+        if (musicToggle) {
+          musicToggle.textContent = '🔇';
+        }
+      }
+    };
+
+    if (musicToggle) {
+      musicToggle.addEventListener('click', async () => {
+        if (!music) return;
+        if (music.paused) {
+          await startMusic();
+        } else {
+          music.pause();
+          musicToggle.textContent = '🔇';
+        }
+      });
+    }
+
+    document.addEventListener('pointerdown', startMusic, { once: true });
+    document.addEventListener('touchstart', startMusic, { once: true });
+    document.addEventListener('keydown', startMusic, { once: true });
+
+    function revealMessage() {
+      overlay.classList.add('hidden');
+      messageCard.classList.add('visible');
+      noPhase.classList.remove('show');
+      noPhase.textContent = '';
+      emojiDance.classList.add('show');
+      setTimeout(() => emojiDance.classList.remove('show'), 1100);
+      startMusic();
+    }
+
+    yesBtn.addEventListener('click', revealMessage);
+
+    noBtn.addEventListener('click', () => {
+      noCount += 1;
+      if (noCount < 4) {
+        noPhase.textContent = noMessages[noCount - 1];
+        noPhase.classList.add('show');
+        emojiDance.textContent = noCount === 1 ? '💗' : noCount === 2 ? '✨' : '😊';
+        emojiDance.classList.add('show');
+        setTimeout(() => emojiDance.classList.remove('show'), 800);
+        noBtn.textContent = noCount === 3 ? 'No 😅' : 'No 😌';
+      } else {
+        noPhase.textContent = 'Está bien… te lo digo igual 😌';
+        noPhase.classList.add('show');
+        emojiDance.textContent = '💖';
+        emojiDance.classList.add('show');
+        setTimeout(revealMessage, 900);
+      }
+    });
+  </script>
+</body>
+</html>
